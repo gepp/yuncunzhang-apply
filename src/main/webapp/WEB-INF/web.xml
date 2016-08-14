@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
+	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 	<display-name>yuncunzhang</display-name>
@@ -37,7 +37,7 @@
 	<filter>
 		<display-name>ContextPathFilter</display-name>
 		<filter-name>ContextPathFilter</filter-name>
-		<filter-class>com.jdk2010.filter.ContextPathFilter</filter-class>
+		<filter-class>com.jdk2010.apply.web.filter.ContextPathFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>ContextPathFilter</filter-name>
@@ -60,6 +60,14 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.jdk2010.apply.web.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/distributor/*</url-pattern>
+	</filter-mapping>
 
 
 	<welcome-file-list>

@@ -1,197 +1,104 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.tag.mytag.com" prefix="page"  %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>商户</title>
-<link href="${ contextpath }/res/css/style.css" rel="stylesheet"
-	type="text/css" />
-	<link href="${ contextpath }/res/css/page.css" rel="stylesheet"
-	type="text/css" />
-<script type="text/javascript" src="${ contextpath }/res/js/jquery.js"></script>
-<script type="text/javascript" src="${ contextpath }/res/js/common.js"></script>
-<script type="text/javascript" src="${ contextpath }/res/js/layer/layer.js"></script>
-
+	<meta charset="UTF-8">
+	<style type="text/css">
+		*{padding: 0; margin: 0; outline: none;}
+		html,body{font-family: "微软雅黑"; color: #666;}
+		.settled-banner{width: 100%; height: 146px; background: url(${contextpath}/res/images/banner_bg.png) no-repeat center center; background-size:auto 100%;}
+		.settled-banner-cont{width: 1200px; margin: 0 auto;}
+		.settled-banner-cont h5{display: block; float: left; font-size: 24px; color: #fff;margin: 60px 0 0 300px;}
+		.settled-banner-cont p{display: block; float: right; font-size: 16px; color: #fff; margin-top: 60px;}
+		.settled-banner-cont p a{color: #fff; margin-left: 10px;}
+		.main-cont{width: 1200px; margin: 30px auto 30px auto;}
+		.tip{width: 1200px; padding: 10px; background: #fffae5; border: 1px solid #eee; font-size: 14px; color: #ea8010;}
+		.tip img{width: 20px; vertical-align: middle; margin-right: 10px;}
+		.main-cont-title{margin: 30px 0 20px 0px;}
+		.main-cont-title:before,.main-cont-title:after{display: block; clear: both; content: "";}
+		.main-cont-title h5{font-size: 18px; color: #333; float: left; }
+		.main-cont-title h5:after{ display: block; content: ""; float: left; width: 3px; height: 18px; background: #1fb8bd; margin-right: 6px; margin-top: 4px;}
+		.main-cont table{border-top: 1px solid #eee;}
+		.main-cont table th,.main-cont table td{border-bottom: 1px solid #eee; text-align: center;}
+		.main-cont table th{padding: 10px 0; background: #fafafa;}
+		.main-cont table td{padding: 25px 0; color: #999;}
+		.main-cont table td a{ color: #188bca;}
+		.btn{width: 100px; height: 34px; text-align: center; line-height: 34px; border: none; background: url(${contextpath}/res/images/btnbg.png); background-size: 100% 100%; color: #fff;  font-size: 14px; border-radius: 4px; cursor: pointer; float: right;}
+		.btn:hover{color: #fff; background: #05B7BE;}
+	</style>
+	<script type="text/javascript" src="${ contextpath }/res/js/jquery.js"></script>
+</head>
+	<title>商户</title>
 </head>
 <body>
-
-<div class="place">
-		<span>位置：</span>
-		<ul class="placeul">
-			<li><a href="#">首页</a></li>
-			<li><a href="#">商户</a></li>
-		</ul>
+<div class="settled-banner">
+	<div class="settled-banner-cont">
+		<h5>欢迎使用商家入驻平台</h5>
+		<p>${securityUser.username}<a href="${contextpath}/sso/logout">[退出]</a></p>
+	</div>
 </div>
-<div class="rightinfo">
-		
-					
-							 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 				 			 			
-																																																																																																																																																																																																																																	 <div class="tools">
-			<ul class="toolbar">
-			<li class="click" id="table_add"><span><img src="${ contextpath }/res/images/t01.png" /></span>添加</li>
-	        <li id="table_delete" ><span><img src="${ contextpath }/res/images/t03.png" /></span>删除</li>
-	        <li  id="table_refresh"><span><img src="${ contextpath }/res/images/t04.png" /></span>查询</li>
-			</ul>
-		</div>
-				
-			 		<div class="formtitle1">
-			<span>商户</span>
-		</div>
-		<table class="tablelist">
-		<thead>
-				<tr>
-				<th><input type="checkbox" width="15px"  id="checkAll"/></th>
-				
-														   <th>id</th>
-																			   <th>顺序身份号码，系统自动生成8位以a打头后接7位顺序阿拉伯数字从a0000001开始往后顺序排列该值作为用户的登录名写入用户表</th>
-																			   <th>公司全称</th>
-																			   <th>三证合一图片地址</th>
-																			   <th>法人姓名</th>
-																			   <th>法人身份证照片正面</th>
-																			   <th>法人身份证照片反面</th>
-																			   <th>公司地址</th>
-																			   <th>公司电话</th>
-																			   <th>公司开户行</th>
-																			   <th>公司开户行账号</th>
-																			   <th>公司email</th>
-																			   <th>公司传真</th>
-																			   <th>联系人姓名</th>
-																			   <th>联系人电话</th>
-																			   <th>联系人电子邮件</th>
-																			   <th>注册时间</th>
-																			   <th>激活时间</th>
-																			   <th>状态，枚举字符串NORMAL (正常)CANCELED (注销)LOCKED (锁定)AUDITED (已审核)UNAUDITED (未审核)</th>
-																			   <th>代理商现金汇总账户</th>
-																			   <th>行业名称</th>
-																			   <th>行业经营许可证图片</th>
-																			   <th>创建时间</th>
-																			   <th>操作员id</th>
-													<th>操作</th>
+<!--=====================-->
+<div class="main-cont">
+	<div class="tip"><img src="${contextpath}/res/images/tip.png"><strong>重要提示：</strong>这里是提示区域，页面有错误信息将会展示在这个地方，前面所写的文字全部是屁话！</div>
+	<div class="main-cont-title">
+		<h5>我的入驻信息</h5>
+		<c:if test="${empty baseDistributor}">
+			<button class="btn" id="addBtn">我要入驻</button>
+		</c:if>
+	</div>
+	<table cellpadding="0" cellspacing="0" border="0" width="100%">
+		<tr>
+			<th>商户号</th>
+			<th>商户名称</th>
+			<th>法人</th>
+			<th>联系人</th>
+			<th>联系方式</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+		<c:if test="${not empty baseDistributor}">
+			<tr>
+				<td>${baseDistributor.companyNumber}</td>
+				<td>${baseDistributor.companyName}</td>
+				<td>${baseDistributor.legalPerson}</td>
+				<td>${baseDistributor.companyPerson1}</td>
+				<td>${baseDistributor.companyPerson1Telephone}</td>
+				<td></td>
+				<td><a href="${contextpath}/distributor/updateview">编辑资料</a></td>
 			</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${pageList.list}" var="item">
-				 	
-			       <tr>
-						<td><input type="checkbox" name="subBox" value="${item.id}" /></td>
-												 						<td>
-															${ item.id}
-													</td>	
-
-						 												 						<td>
-															${ item.companyNumber}
-													</td>	
-
-						 												 						<td>
-															${ item.companyName}
-													</td>	
-
-						 												 						<td>
-															${ item.threeinoneLicencePic}
-													</td>	
-
-						 												 						<td>
-															${ item.legalPerson}
-													</td>	
-
-						 												 						<td>
-															${ item.legalPersonIdCardPicAhead}
-													</td>	
-
-						 												 						<td>
-															${ item.legalPersonIdCardPicBack}
-													</td>	
-
-						 												 						<td>
-															${ item.companyAddress}
-													</td>	
-
-						 												 						<td>
-															${ item.companyTelephone}
-													</td>	
-
-						 												 						<td>
-															${ item.companyBankAddress}
-													</td>	
-
-						 												 						<td>
-															${ item.companyBankAccount}
-													</td>	
-
-						 												 						<td>
-															${ item.companyEmail}
-													</td>	
-
-						 												 						<td>
-															${ item.companyFax}
-													</td>	
-
-						 												 						<td>
-															${ item.companyPerson1}
-													</td>	
-
-						 												 						<td>
-															${ item.companyPerson1Telephone}
-													</td>	
-
-						 												 						<td>
-															${ item.companyPerson1Email}
-													</td>	
-
-						 												 						<td>
-															${ item.registerTime}
-													</td>	
-
-						 												 						<td>
-															${ item.activeTime}
-													</td>	
-
-						 												 						<td>
-															${ item.status}
-													</td>	
-
-						 												 						<td>
-															${ item.cashAccount}
-													</td>	
-
-						 												 						<td>
-															${ item.tradeName}
-													</td>	
-
-						 												 						<td>
-															${ item.tradeLicencePic}
-													</td>	
-
-						 												 						<td>
-															${ item.ctime}
-													</td>	
-
-						 												 						<td>
-															${ item.oUid}
-													</td>	
-
-						 													<td>
-							<a href="${ contextpath }/basedistributor/modify.htm?id=${item.id}" class="tablelink">编辑</a> 
-							<a href="${ contextpath }/basedistributor/view.htm?id=${item.id}"  class="tablelink">查看</a>
- 				   </tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		<page:page href="${ contextpath}/basedistributor/list?" data="pageList" />
-		
+		</c:if>
+	</table>
+	<div class="main-cont-title">
+		<h5>我的商城</h5>
+	</div>
+	<table cellpadding="0" cellspacing="0" border="0" width="100%">
+		<tr>
+			<th>商城名称</th>
+			<th>商城域名</th>
+			<th>商城类型</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+		<tr>
+			<td>葛大爷与海公公成人云村长商城</td>
+			<td>www.yuncunzhanggaoji.com</td>
+			<td>小商品批发</td>
+			<td>正常</td>
+			<td><button class="btn">商城管理</button></td>
+		</tr>
+	</table>
 </div>
 </body>
 </html>
-
 <script type="text/javascript">
-		$('.tablelist tbody tr:odd').addClass('odd');
-		$(document).ready(function(){
-			table_init("${ contextpath}/basedistributor","${ contextpath}/basedistributor/list?");
-		});
+	$(document).ready(
+			function(){
+				$('#addBtn').click(function(e){
+					window.location.href='${ contextpath}/distributor/addview';
+				});
+			}
+	);
 </script>
-
- 
